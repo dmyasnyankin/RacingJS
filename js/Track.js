@@ -15,19 +15,20 @@ var trackGrid = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                  1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1,
                  1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1,
                  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1,
-                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+                 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+                 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
                  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
 const TRACK_ROAD = 0;
 const TRACK_WALL = 1;
 const TRACK_PLAYERSTART = 2;
+const TRACK_FINISH = 3;
 
-function isWallAtColRow(col, row) {
+function isObstacleAtColRow(col, row) {
 	if(col >= 0 && col < TRACK_COLS &&
 		row >= 0 && row < TRACK_ROWS) {
 		 var trackIndexUnderCoord = rowColToArrayIndex(col, row);
-		 return (trackGrid[trackIndexUnderCoord] == TRACK_WALL);
+		 return (trackGrid[trackIndexUnderCoord] != TRACK_ROAD);
 	} else {
 		return false;
 	}
@@ -41,7 +42,7 @@ function carTrackHandling() {
 	if(carTrackCol >= 0 && carTrackCol < TRACK_COLS &&
 		carTrackRow >= 0 && carTrackRow < TRACK_ROWS) {
 
-		if(isWallAtColRow( carTrackCol,carTrackRow )) {
+		if(isObstacleAtColRow( carTrackCol,carTrackRow )) {
             carSpeed *= -0.5;
 		} // end of track found
 	} // end of valid col and row
@@ -57,12 +58,20 @@ function drawTracks() {
 		for(var eachCol=0;eachCol<TRACK_COLS;eachCol++) {
 
 			var arrayIndex = rowColToArrayIndex(eachCol, eachRow); 
-
-			if(trackGrid[arrayIndex] == TRACK_ROAD) {
-                canvasContext.drawImage(roadPic, TRACK_W*eachCol, TRACK_H*eachRow);
-            } else if (trackGrid[arrayIndex] == TRACK_WALL) {
-                canvasContext.drawImage(wallPic, TRACK_W*eachCol, TRACK_H*eachRow);
-            }// end of is this track here
+			var tileKindPresent = trackGrid[arrayIndex];
+			var useImg;
+			switch(tileKindPresent){
+				case TRACK_ROAD:
+					useImg = roadPic;
+					break;
+				case TRACK_WALL:
+					useImg = wallPic;
+					break;
+				case TRACK_FINISH:
+					useImg = finishPic;
+					break;
+			} 
+			canvasContext.drawImage(useImg, TRACK_W*eachCol, TRACK_H*eachRow);
 		} // end of for each col
 	} // end of for each row
 

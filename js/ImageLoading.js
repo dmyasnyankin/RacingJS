@@ -1,6 +1,7 @@
 var carPic = document.createElement("img");
 var roadPic = document.createElement("img");
 var wallPic = document.createElement("img");
+var finishPic = document.createElement("img");
 
 var picsToLoad = 0; // set automatically via imageList in loadImages()
 
@@ -21,7 +22,8 @@ function loadImages(){
     var imageList = [
         {varName: carPic, theFile: "benzo.png"},
         {varName: roadPic, theFile: "road.png"},
-        {varName: wallPic, theFile: "grasswall.png"}
+        {varName: wallPic, theFile: "grasswall.png"},
+        {varName: finishPic, theFile: "finish_line.png"}
     ];
 
     picsToLoad = imageList.length;
