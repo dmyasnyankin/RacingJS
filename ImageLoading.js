@@ -1,23 +1,32 @@
 var carPic = document.createElement("img");
-var carPicLoaded = false;
-
 var roadPic = document.createElement("img");
 var wallPic = document.createElement("img");
 
-function carImageLoad(){
-    carPic.onload = function(){
-        carPicLoaded = true;
+var picsToLoad = 0; // set automatically via imageList in loadImages()
+
+function countLoadedImagesAndLaunchIfReady(){
+    picsToLoad -= 1;
+    console.log(picsToLoad);
+    if ( picsToLoad == 0 ){
+        imagesLoaded();
     }
-    // carPic.src = "ferrari.png";
-    carPic.src = "benzo.png";
 }
 
-function trackLoadImages(){
-    roadPic.src = "road.png";
-    wallPic.src = "grasswall.png";
+function beginLoadingImage(imgVar, filename){
+    imgVar.onload = countLoadedImagesAndLaunchIfReady;
+    imgVar.src = filename;
 }
 
 function loadImages(){
-    carImageLoad();
-    trackLoadImages();
+    var imageList = [
+        {varName: carPic, theFile: "benzo.png"},
+        {varName: roadPic, theFile: "road.png"},
+        {varName: wallPic, theFile: "grasswall.png"}
+    ];
+
+    picsToLoad = imageList.length;
+
+    for(var i = 0; i < imageList.length;  i++) {
+        beginLoadingImage(imageList[i].varName, imageList[i].theFile)
+    }
 }
