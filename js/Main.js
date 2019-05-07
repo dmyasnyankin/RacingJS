@@ -1,5 +1,6 @@
 var canvas, canvasContext;
 
+var benzo = new carClass();
 var popoCar = new carClass();
 
 window.onload = function() {
@@ -18,7 +19,8 @@ function imagesLoaded(){
 	setInterval(updateAll, 1000/framesPerSecond);
 
     setupInput();
-	popoCar.reset();
+	benzo.reset(benzoPic);
+	popoCar.reset(popoPic);
 }
 
 function updateAll() {
@@ -27,12 +29,12 @@ function updateAll() {
 }
 
 function moveAll() {
+	benzo.move();
 	popoCar.move();
-	
-	carTrackHandling(popoCar);
 }
 
 function drawAll() {
 	drawTracks();
+    benzo.draw();
     popoCar.draw();
 }

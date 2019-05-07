@@ -1,4 +1,5 @@
-var carPic = document.createElement("img");
+var benzoPic = document.createElement("img");
+var popoPic = document.createElement("img");
 var trackPics = [];
 // var roadPic = document.createElement("img");
 // var wallPic = document.createElement("img");
@@ -26,7 +27,8 @@ function loadImageForTrackCode( trackCode, fileName) {
 
 function loadImages(){
     var imageList = [
-        {varName: carPic, theFile: "police_car.png"},
+        {varName: popoPic, theFile: "police_car.png"},
+        {varName: benzoPic, theFile: "benzo.png"},
         
         {trackType: TRACK_ROAD, theFile: "road.png"},
         {trackType: TRACK_WALL, theFile: "grasswall.png"},
