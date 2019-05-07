@@ -8,9 +8,7 @@ window.onload = function() {
 	setInterval(updateAll, 1000/framesPerSecond);
 
     setupInput();
-
-    trackLoadImages()
-    carImageLoad();
+    loadImages();
 	carReset();
 }
 
@@ -25,12 +23,7 @@ function moveAll() {
 	carTrackHandling();
 }
 
-function clearScreen(){
-    colorRect(0,0, canvas.width,canvas.height, 'black');
-}
-
 function drawAll() {
-    clearScreen();
 	drawTracks();
     carDraw();
 }
