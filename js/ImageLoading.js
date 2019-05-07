@@ -26,7 +26,7 @@ function loadImageForTrackCode( trackCode, fileName) {
 
 function loadImages(){
     var imageList = [
-        {varName: carPic, theFile: "benzo.png"},
+        {varName: carPic, theFile: "police_car.png"},
         
         {trackType: TRACK_ROAD, theFile: "road.png"},
         {trackType: TRACK_WALL, theFile: "grasswall.png"},
