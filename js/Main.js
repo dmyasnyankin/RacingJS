@@ -18,9 +18,16 @@ function imagesLoaded(){
 	var framesPerSecond = 30;
 	setInterval(updateAll, 1000/framesPerSecond);
 
-    setupInput();
-	porsche.reset(benzoPic);
-	benzo.reset(porschePic);
+	setupInput();
+	
+	loadLevel(levelOne);
+
+}
+
+function loadLevel(whichLevel) {
+	trackGrid = whichLevel.slice(); // use slice to dup trackGrid array
+	porsche.reset(porschePic, "Holy Porscha");
+	benzo.reset(benzoPic, "Thug Lyfe");
 }
 
 function updateAll() {
