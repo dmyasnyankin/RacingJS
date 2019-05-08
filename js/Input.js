@@ -3,10 +3,10 @@ const KEY_RIGHT_ARROW = 39;
 const KEY_DOWN_ARROW = 40;
 const KEY_LEFT_ARROW = 37;
 
-var keyHeld_Gas = false;
-var keyHeld_Reverse = false;
-var keyHeld_TurnLeft = false;
-var keyHeld_TurnRight = false;
+const KEY_W = 87;
+const KEY_A = 65;
+const KEY_S = 83;
+const KEY_D = 68;
 
 var mouseX = 0;
 var mouseY = 0;
@@ -16,6 +16,9 @@ function setupInput() {
 
     document.addEventListener('keydown', keyPressed);
     document.addEventListener('keyup', keyReleased);
+
+    benzo.setupInput(KEY_W, KEY_D, KEY_S, KEY_A);
+    porsche.setupInput(KEY_UP_ARROW, KEY_RIGHT_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW);
 }
 
 function updateMousePos(evt) {
@@ -32,34 +35,28 @@ function updateMousePos(evt) {
 	carSpeedY = -4;*/
 }
 
+function keySet(keyEvent, whichCar, setTo) {
+    if (keyEvent.keyCode == whichCar.controlKeyUp){
+        whichCar.keyHeld_Gas = setTo;
+    }
+    if (keyEvent.keyCode == whichCar.controlKeyRight){
+        whichCar.keyHeld_TurnRight = setTo;
+    }
+    if (keyEvent.keyCode == whichCar.controlKeyDown){
+        whichCar.keyHeld_Reverse = setTo;
+    }
+    if (keyEvent.keyCode == whichCar.controlKeyLeft){
+        whichCar.keyHeld_TurnLeft = setTo;
+    }
+}
+
 function keyPressed(evt) {
     // console.log("Key Pressed " + evt.keyCode);
-    if (evt.keyCode == KEY_UP_ARROW){
-        keyHeld_Gas = true;
-    }
-    if (evt.keyCode == KEY_RIGHT_ARROW){
-        keyHeld_TurnRight = true;
-    }
-    if (evt.keyCode == KEY_DOWN_ARROW){
-        keyHeld_Reverse = true;
-    }
-    if (evt.keyCode == KEY_LEFT_ARROW){
-        keyHeld_TurnLeft = true;
-    }
+    keySet(evt, benzo, true);
+    keySet(evt, porsche, true);
 }
 
 function keyReleased(evt) {
     // console.log("Key Released: " + evt.keyCode);
-    if (evt.keyCode == KEY_UP_ARROW){
-        keyHeld_Gas = false;
-    }
-    if (evt.keyCode == KEY_RIGHT_ARROW){
-        keyHeld_TurnRight = false;
-    }
-    if (evt.keyCode == KEY_DOWN_ARROW){
-        keyHeld_Reverse = false;
-    }
-    if (evt.keyCode == KEY_LEFT_ARROW){
-        keyHeld_TurnLeft = false;
-    }
-}
+    keySet(evt, benzo, false);
+    keySet(evt, porsche, false);}

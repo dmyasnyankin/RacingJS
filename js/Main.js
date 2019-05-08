@@ -1,7 +1,7 @@
 var canvas, canvasContext;
 
+var porsche = new carClass();
 var benzo = new carClass();
-var popoCar = new carClass();
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
@@ -19,8 +19,8 @@ function imagesLoaded(){
 	setInterval(updateAll, 1000/framesPerSecond);
 
     setupInput();
-	benzo.reset(benzoPic);
-	popoCar.reset(popoPic);
+	porsche.reset(benzoPic);
+	benzo.reset(porschePic);
 }
 
 function updateAll() {
@@ -29,12 +29,12 @@ function updateAll() {
 }
 
 function moveAll() {
+	porsche.move();
 	benzo.move();
-	popoCar.move();
 }
 
 function drawAll() {
 	drawTracks();
+    porsche.draw();
     benzo.draw();
-    popoCar.draw();
 }
