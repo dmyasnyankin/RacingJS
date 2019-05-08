@@ -1,7 +1,7 @@
 const GROUNDSPEED_DECAY = 0.95;
-const DRIVE_POWER = 1.5;
+const DRIVE_POWER = 0.5;
 const REVERSE_POWER = 0.2;
-const TURN_RATE = 0.3;
+const TURN_RATE = 0.2;
 const MIN_SPEED_TO_TURN = 0.5;
 
 function carClass() {
